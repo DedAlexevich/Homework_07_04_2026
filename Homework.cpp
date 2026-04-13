@@ -105,7 +105,7 @@ BTreeIt< T, K > prev (BTreeIt< T, K > it)
     if (next->childs[ind]) {
       next = next->childs[ind];
       next = maximum(next);
-      ind = 0;
+      ind = K - 1;
     } else {
       BTree<T, K>* parent = next->parent;
       while (parent) {

@@ -1,6 +1,6 @@
 #include <iostream>
 
-template< class T, size_t K>
+template< class T, size_t K >
 struct BTree {
   T val[K];
   BTree< T, K > * childs[K + 1];
@@ -12,7 +12,7 @@ struct BTreeIt {
   size_t s;
   BTree< T, K > * current;
 };
-template< class T, size_t K>
+template< class T, size_t K >
 T value (BTreeIt< T, K > it)
 {
   return it.current->val[it.s];
@@ -110,7 +110,7 @@ BTreeIt< T, K > prev (BTreeIt< T, K > it)
       next = maximum(next);
       ind = K - 1;
     } else {
-      BTree<T, K>* parent = next->parent;
+      BTree< T, K >* parent = next->parent;
       while (parent) {
         if (parent->childs[0] != next) {
           for (size_t i = K; i > 0; --i) {

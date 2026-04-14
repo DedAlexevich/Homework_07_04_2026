@@ -1,11 +1,14 @@
 #include <iostream>
 
-template< class T, size_t K> struct BTree {
+template< class T, size_t K>
+struct BTree {
   T val[K];
   BTree< T, K > * childs[K + 1];
   BTree< T, K > * parent;
-} ;
-template< class T, size_t K > struct BTreeIt {
+};
+
+template< class T, size_t K >
+struct BTreeIt {
   size_t s;
   BTree< T, K > * current;
 };
@@ -15,7 +18,7 @@ T value (BTreeIt< T, K > it)
   return it.current->val[it.s];
 }
 
-template< class T, size_t K>
+template< class T, size_t K >
 BTree< T, K >* minimum(BTree< T, K >* root)
 {
   if (!root) {
@@ -27,7 +30,7 @@ BTree< T, K >* minimum(BTree< T, K >* root)
   return root;
 }
 
-template< class T, size_t K>
+template< class T, size_t K >
 BTree< T, K >* maximum(BTree< T, K >* root)
 {
   if (!root) {
@@ -39,10 +42,10 @@ BTree< T, K >* maximum(BTree< T, K >* root)
   return root;
 }
 
-template< class T, size_t K>
+template< class T, size_t K >
 BTreeIt< T, K > next (BTreeIt< T, K > it)
 {
-  BTree<T, K>* next = it.current;
+  BTree< T, K >* next = it.current;
   size_t ind = it.s;
 
   if (!next) {
@@ -83,10 +86,10 @@ BTreeIt< T, K > next (BTreeIt< T, K > it)
   return {ind, next};
 }
 
-template< class T, size_t K>
+template< class T, size_t K >
 BTreeIt< T, K > prev (BTreeIt< T, K > it)
 {
-  BTree<T, K>* next = it.current;
+  BTree< T, K >* next = it.current;
   size_t ind = it.s;
 
   if (!next) {
@@ -105,7 +108,7 @@ BTreeIt< T, K > prev (BTreeIt< T, K > it)
     if (next->childs[ind]) {
       next = next->childs[ind];
       next = maximum(next);
-      ind = 0;
+      ind = K - 1;
     } else {
       BTree<T, K>* parent = next->parent;
       while (parent) {
@@ -127,13 +130,13 @@ BTreeIt< T, K > prev (BTreeIt< T, K > it)
   return {ind, next};
 }
 
-template< class T, size_t K>
+template< class T, size_t K >
 bool hasNext(BTreeIt< T, K > it)
 {
   return next(it).current;
 }
 
-template< class T, size_t K>
+template< class T, size_t K >
 bool hasPrev(BTreeIt< T, K > it)
 {
   return prev(it).current;
